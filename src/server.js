@@ -16,9 +16,15 @@ export default function () {
                 return schema.reminders.all()
             })
 
-            this.post("api/reminders", (schema, request) => {
+            this.post("/api/reminders", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
                 return schema.reminders.create(attrs)
+            })
+
+            this.delete("/api/reminders/:id", (schema, request) => {
+                let id = request.params.id
+
+                return schema.reminders.find(id).destroy()
             })
         },
     })
